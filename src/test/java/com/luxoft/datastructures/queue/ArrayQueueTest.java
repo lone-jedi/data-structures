@@ -207,4 +207,46 @@ public class ArrayQueueTest {
         ArrayQueue arrayQueue = new ArrayQueue();
         assertEquals("[]", arrayQueue.toString());
     }
+
+    @Test
+    public void testEnqueueWhenQueueIsEmpty() {
+        ArrayQueue arrayQueue = new ArrayQueue();
+
+        arrayQueue.enqueue(10);
+        arrayQueue.enqueue(13);
+        arrayQueue.enqueue(1);
+        arrayQueue.enqueue(-34);
+
+        arrayQueue.dequeue();
+        arrayQueue.dequeue();
+        arrayQueue.dequeue();
+        arrayQueue.dequeue();
+        Assertions.assertThrows(IllegalStateException.class,
+                () -> arrayQueue.dequeue());
+
+        arrayQueue.enqueue(101);
+        assertEquals(101, arrayQueue.dequeue());
+    }
+
+    @Test
+    public void testExpandQueueSize() {
+        ArrayQueue arrayQueue = new ArrayQueue(0);
+
+        for(int i = 0; i < 1_000_000; ++i) {
+            arrayQueue.enqueue(i);
+        }
+
+        for(int i = 0; i < 1_000_000; ++i) {
+            assertEquals(i, arrayQueue.dequeue());
+        }
+
+        for(int i = 0; i < 10; ++i) {
+            Assertions.assertThrows(IllegalStateException.class, () -> {
+                arrayQueue.dequeue();
+            });
+        }
+
+        assertEquals(true, arrayQueue.isEmpty());
+        assertEquals(0, arrayQueue.size());
+    }
 }
