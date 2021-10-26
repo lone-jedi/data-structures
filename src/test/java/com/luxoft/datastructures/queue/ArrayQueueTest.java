@@ -249,4 +249,10 @@ public class ArrayQueueTest {
         assertEquals(true, arrayQueue.isEmpty());
         assertEquals(0, arrayQueue.size());
     }
+
+    @Test
+    public void testConstructorSizeLessThanZero() {
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new ArrayQueue(-1));
+    }
 }

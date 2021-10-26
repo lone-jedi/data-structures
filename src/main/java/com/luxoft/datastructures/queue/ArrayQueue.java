@@ -10,6 +10,9 @@ public class ArrayQueue implements Queue {
     }
 
     public ArrayQueue(int size) {
+        if(size < 0) {
+            throw new IllegalArgumentException("Size of queue must be more or equal zero");
+        }
         arrayQueue = new Object[size];
     }
 
