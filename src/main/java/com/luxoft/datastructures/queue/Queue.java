@@ -1,7 +1,5 @@
 package com.luxoft.datastructures.queue;
 
-// FIFO
-//
 public interface Queue {
     void enqueue(Object value);
 
