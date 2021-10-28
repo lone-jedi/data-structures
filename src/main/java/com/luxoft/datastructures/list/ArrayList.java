@@ -5,7 +5,14 @@ public class ArrayList implements List{
     private Object[] arrayList;
 
     public ArrayList() {
-        arrayList = new Object[10000];
+        arrayList = new Object[10];
+    }
+
+    public ArrayList(int size) {
+        if(size < 0) {
+            throw new IllegalArgumentException("ArrayList size must be greater or equals to zero");
+        }
+        arrayList = new Object[size];
     }
 
     @Override
@@ -13,6 +20,11 @@ public class ArrayList implements List{
         if(value == null) {
             throw new NullPointerException("Null values are not support");
         }
+
+        if(head >= arrayList.length) {
+            resize();
+        }
+
         arrayList[head++] = value;
     }
 
@@ -22,8 +34,12 @@ public class ArrayList implements List{
             throw new NullPointerException("Null values are not support");
         }
 
-        if(index < 0 || index >= head) {
+        if(index < 0 || index > head) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bound");
+        }
+
+        if(head >= arrayList.length) {
+            resize();
         }
 
         for (int i = head; i > index; --i) {
@@ -31,6 +47,8 @@ public class ArrayList implements List{
         }
 
         arrayList[index] = value;
+
+        head++;
     }
 
     @Override
@@ -138,5 +156,36 @@ public class ArrayList implements List{
         }
 
         return -1;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+        string.append("[");
+
+        int i = 0;
+
+        while(i < head - 1) {
+            string.append(arrayList[i++]);
+            string.append(", ");
+        }
+
+        if(i == head - 1) {
+            string.append(arrayList[i]);
+        }
+
+        string.append("]");
+
+        return string.toString();
+    }
+
+    private void resize() {
+        Object[] newArrayList = new Object[(int) ((arrayList.length == 0 ? 2 : arrayList.length) * 1.5)];
+
+        for (int i = 0; i < arrayList.length; i++) {
+            newArrayList[i] = arrayList[i];
+        }
+
+        arrayList = newArrayList;
     }
 }

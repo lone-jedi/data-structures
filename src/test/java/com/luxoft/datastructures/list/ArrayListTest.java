@@ -1,5 +1,6 @@
 package com.luxoft.datastructures.list;
 
+import com.luxoft.datastructures.queue.ArrayQueue;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -29,11 +30,11 @@ public class ArrayListTest {
     public void testAddToListHugeAmountOfItemsAndSize() {
         ArrayList arrayList = new ArrayList();
 
-        for (int i = 0; i < 1_000_000_000; i++) {
+        for (int i = 0; i < 10_000_000; i++) {
             arrayList.add(i);
         }
 
-        assertEquals(1_000_000_000, arrayList.size());
+        assertEquals(10_000_000, arrayList.size());
     }
 
     @Test
@@ -151,6 +152,18 @@ public class ArrayListTest {
     }
 
     @Test
+    public void testAddAfterAllElenemts() {
+        ArrayList arrayList = new ArrayList();
+
+        for (int i = 0; i < 10; i++) {
+            arrayList.add(i);
+        }
+
+        arrayList.add(111, 10);
+        assertEquals(111, arrayList.get(10));
+    }
+
+    @Test
     public void testAddNByIncorrectIndex() {
         ArrayList arrayList = new ArrayList();
 
@@ -162,7 +175,7 @@ public class ArrayListTest {
                 arrayList.add(102, -1));
 
         Assertions.assertThrows(IndexOutOfBoundsException.class, () ->
-                arrayList.add(102, 10));
+                arrayList.add(102, 11));
     }
 
     @Test
@@ -390,4 +403,28 @@ public class ArrayListTest {
         assertEquals(-1, arrayList.lastIndexOf("Hi"));
     }
 
+    @Test
+    public void testCustomSizeConstructor() {
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
+                new ArrayList(-1));
+    }
+
+    @Test
+    public void testToStringList() {
+        ArrayList arrayList = new ArrayList();
+
+        arrayList.add("Apple");
+        arrayList.add("Pineapple");
+        arrayList.add("Banana");
+
+        String expected = "[Apple, Pineapple, Banana]";
+
+        assertEquals(expected, arrayList.toString());
+    }
+
+    @Test
+    public void testToStringIfListIsEmpty() {
+        ArrayList arrayList = new ArrayList();
+        assertEquals("[]", arrayList.toString());
+    }
 }
