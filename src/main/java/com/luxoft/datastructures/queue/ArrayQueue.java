@@ -75,6 +75,9 @@ public class ArrayQueue implements Queue {
 
     @Override
     public void clear() {
+        for (int i = front; i < rear; ++i) {
+            arrayQueue[i] = null;
+        }
         front = rear = 0;
     }
 
