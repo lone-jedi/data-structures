@@ -13,14 +13,20 @@ public class ArrayQueue implements Queue {
         if(size < 0) {
             throw new IllegalArgumentException("Size of queue must be more or equal zero");
         }
+
         arrayQueue = new Object[size];
     }
 
     @Override
     public void enqueue(Object value) {
+        if(value == null) {
+            throw new NullPointerException("Null values are not supported");
+        }
+
         if(arrayQueue.length == rear) {
             expandSize();
         }
+
         arrayQueue[rear++] = value;
     }
 
@@ -29,6 +35,7 @@ public class ArrayQueue implements Queue {
         if(isEmpty()) {
             throw new IllegalStateException("Try to dequeue value from empty queue");
         }
+
         return arrayQueue[front++];
     }
 
@@ -37,6 +44,7 @@ public class ArrayQueue implements Queue {
         if(isEmpty()) {
             throw new IllegalStateException("Try to peek value from empty queue");
         }
+
         return arrayQueue[front];
     }
 
@@ -52,11 +60,16 @@ public class ArrayQueue implements Queue {
 
     @Override
     public boolean contains(Object value) {
+        if(value == null) {
+            throw new NullPointerException("Null values are not supported");
+        }
+
         for (int i = front; i < rear; ++i) {
             if(arrayQueue[i].equals(value)) {
                 return true;
             }
         }
+
         return false;
     }
 

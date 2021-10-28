@@ -255,4 +255,18 @@ public class ArrayQueueTest {
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> new ArrayQueue(-1));
     }
+
+    @Test
+    public void testEnqueueNullValue() {
+        ArrayQueue arrayQueue = new ArrayQueue();
+        Assertions.assertThrows(NullPointerException.class,
+                () -> arrayQueue.enqueue(null));
+    }
+
+    @Test
+    public void testContainsNullValue() {
+        ArrayQueue arrayQueue = new ArrayQueue();
+        Assertions.assertThrows(NullPointerException.class,
+                () -> arrayQueue.contains(null));
+    }
 }
