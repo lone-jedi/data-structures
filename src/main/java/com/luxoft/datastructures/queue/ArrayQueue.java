@@ -99,7 +99,7 @@ public class ArrayQueue implements Queue {
     }
     
     private void expandSize() {
-        Object[] newArrayQueue = new Object[(arrayQueue.length == 0 ? 1 : arrayQueue.length) * 2];
+        Object[] newArrayQueue = new Object[(int)((arrayQueue.length == 0 ? 2 : arrayQueue.length) * 1.5)];
 
         for (int i = front, counter = 0; i < rear; ++i, ++counter) {
             newArrayQueue[counter] = arrayQueue[i];
