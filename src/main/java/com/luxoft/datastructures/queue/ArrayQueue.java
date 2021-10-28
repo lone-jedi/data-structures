@@ -82,13 +82,19 @@ public class ArrayQueue implements Queue {
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append("[");
-        for (int i = front; i < rear; ++i) {
-            result.append(arrayQueue[i]);
-            if(i + 1 < rear) {
-                result.append(", ");
-            }
+
+        int i = front;
+        while(i < rear - 1) {
+            result.append(arrayQueue[i++]);
+            result.append(", ");
         }
+
+        if(i + 1 == rear) {
+            result.append(arrayQueue[i]);
+        }
+
         result.append("]");
+
         return result.toString();
     }
     
