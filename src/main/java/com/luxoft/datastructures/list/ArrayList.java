@@ -17,15 +17,7 @@ public class ArrayList implements List{
 
     @Override
     public void add(Object value) {
-        if(value == null) {
-            throw new NullPointerException("Null values are not support");
-        }
-
-        if(head >= arrayList.length) {
-            resize();
-        }
-
-        arrayList[head++] = value;
+        add(value, head);
     }
 
     @Override
