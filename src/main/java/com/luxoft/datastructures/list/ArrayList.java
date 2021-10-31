@@ -101,17 +101,7 @@ public class ArrayList implements List{
 
     @Override
     public boolean contains(Object value) {
-        if(value == null) {
-            throw new NullPointerException("Null values are not support");
-        }
-
-        for (int i = 0; i < head; i++) {
-            if(arrayList[i].equals(value)) {
-                return true;
-            }
-        }
-
-        return false;
+        return indexOf(value) != -1;
     }
 
     @Override
