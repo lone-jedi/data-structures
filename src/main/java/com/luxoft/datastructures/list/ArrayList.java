@@ -41,7 +41,6 @@ public class ArrayList implements List{
         }
 
         arrayList[index] = value;
-
         head++;
     }
 
@@ -52,11 +51,8 @@ public class ArrayList implements List{
         }
 
         Object result = arrayList[index];
-
         System.arraycopy(arrayList, index + 1, arrayList, index, head - index - 1);
-
         arrayList[--head] = null;
-
         return result;
     }
 
@@ -143,21 +139,15 @@ public class ArrayList implements List{
     @Override
     public String toString() {
         StringJoiner string = new StringJoiner(", ", "[", "]");
-
         for (int i = 0; i < head; ++i) {
             string.add(arrayList[i].toString());
         }
-
         return string.toString();
     }
 
     private void resize() {
         Object[] newArrayList = new Object[(int) ((arrayList.length == 0 ? 2 : arrayList.length) * 1.5)];
-
-        for (int i = 0; i < arrayList.length; i++) {
-            newArrayList[i] = arrayList[i];
-        }
-
+        System.arraycopy(arrayList, 0, newArrayList, 0, arrayList.length);
         arrayList = newArrayList;
     }
 }
