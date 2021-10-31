@@ -5,7 +5,7 @@ public class ArrayList implements List{
     private Object[] arrayList;
 
     public ArrayList() {
-        arrayList = new Object[10];
+        this(10);
     }
 
     public ArrayList(int size) {
