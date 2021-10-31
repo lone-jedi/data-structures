@@ -1,5 +1,7 @@
 package com.luxoft.datastructures.list;
 
+import java.util.StringJoiner;
+
 public class ArrayList implements List{
     private int head;
     private Object[] arrayList;
@@ -140,21 +142,11 @@ public class ArrayList implements List{
 
     @Override
     public String toString() {
-        StringBuilder string = new StringBuilder();
-        string.append("[");
+        StringJoiner string = new StringJoiner(", ", "[", "]");
 
-        int i = 0;
-
-        while(i < head - 1) {
-            string.append(arrayList[i++]);
-            string.append(", ");
+        for (int i = 0; i < head; ++i) {
+            string.add(arrayList[i].toString());
         }
-
-        if(i == head - 1) {
-            string.append(arrayList[i]);
-        }
-
-        string.append("]");
 
         return string.toString();
     }
