@@ -51,9 +51,7 @@ public class ArrayList implements List{
 
         Object result = arrayList[index];
 
-        for (int i = index; i < head - 1; ++i) {
-            arrayList[i] = arrayList[i + 1];
-        }
+        System.arraycopy(arrayList, index + 1, arrayList, index, head - index - 1);
 
         arrayList[--head] = null;
 
