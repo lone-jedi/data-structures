@@ -143,6 +143,27 @@ public class LinkedList implements List {
             throw new IndexOutOfBoundsException("Index " + index + " out of bound [0, " + size + "]");
         }
 
+        if(index > size / 2) {
+            return getNodeFromHead(index);
+        }
+
+        return getNodeFromTail(index);
+    }
+
+    private Node getNodeFromTail(int index) {
+        int i = -1;
+        Node current = tail;
+        while(current.getChild() != null) {
+            if(index == i) {
+                return current;
+            }
+            current = current.getChild();
+            i++;
+        }
+        return current;
+    }
+
+    private Node getNodeFromHead(int index) {
         int i = size;
         Node current = head;
         while(current.getParent() != null) {
