@@ -1,6 +1,5 @@
-package com.luxoft.datastructures.list;
+package com.luxoft.datastructures.list.arraylist;
 
-import com.luxoft.datastructures.list.arraylist.ArrayList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

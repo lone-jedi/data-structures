@@ -1,8 +1,10 @@
-package com.luxoft.datastructures.list;
+package com.luxoft.datastructures.list.arraylist;
+
+import com.luxoft.datastructures.list.List;
 
 import java.util.StringJoiner;
 
-public class ArrayList implements List{
+public class ArrayList implements List {
     private int head;
     private Object[] arrayList;
 
