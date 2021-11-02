@@ -2,15 +2,15 @@ package com.luxoft.datastructures.list.linkedlist;
 
 public class Node {
     private Object data;
-    private Node parent;
-    private Node child;
+    private Node previous;
+    private Node next;
 
     public Node() {}
 
-    public Node(Object data, Node parent, Node child) {
+    public Node(Object data, Node previous, Node next) {
         this.data = data;
-        this.parent = parent;
-        this.child = child;
+        this.previous = previous;
+        this.next = next;
     }
 
     public Object getData() {
@@ -21,19 +21,19 @@ public class Node {
         this.data = data;
     }
 
-    public Node getParent() {
-        return parent;
+    public Node getPrevious() {
+        return previous;
     }
 
-    public void setParent(Node parent) {
-        this.parent = parent;
+    public void setPrevious(Node previous) {
+        this.previous = previous;
     }
 
-    public Node getChild() {
-        return child;
+    public Node getNext() {
+        return next;
     }
 
-    public void setChild(Node child) {
-        this.child = child;
+    public void setNext(Node next) {
+        this.next = next;
     }
 }

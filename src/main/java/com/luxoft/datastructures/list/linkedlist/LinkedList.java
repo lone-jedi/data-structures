@@ -11,8 +11,8 @@ public class LinkedList implements List {
     public LinkedList() {
         tail = new Node();
         head = new Node();
-        tail.setChild(head);
-        head.setParent(tail);
+        tail.setNext(head);
+        head.setPrevious(tail);
     }
 
     @Override
@@ -27,20 +27,20 @@ public class LinkedList implements List {
         }
 
         Node current = index == size ? head : getNode(index);
-        Node previous = current.getParent();
+        Node previous = current.getPrevious();
         Node newNode = new Node(value, previous, current);
-        current.setParent(newNode);
-        previous.setChild(newNode);
+        current.setPrevious(newNode);
+        previous.setNext(newNode);
         size++;
     }
 
     @Override
     public Object remove(int index) {
         Node value = getNode(index);
-        Node parent = value.getParent();
-        Node child = value.getChild();
-        parent.setChild(child);
-        child.setParent(parent);
+        Node previous = value.getPrevious();
+        Node next = value.getNext();
+        previous.setNext(next);
+        next.setPrevious(previous);
         size--;
         return value.getData();
     }
@@ -57,18 +57,18 @@ public class LinkedList implements List {
         }
 
         Node oldValue = getNode(index);
-        Node parent = oldValue.getParent();
-        Node child = oldValue.getChild();
-        Node newValue = new Node(value, parent, child);
-        parent.setChild(newValue);
-        child.setParent(newValue);
+        Node previous = oldValue.getPrevious();
+        Node next = oldValue.getNext();
+        Node newValue = new Node(value, previous, next);
+        previous.setNext(newValue);
+        next.setPrevious(newValue);
         return oldValue;
     }
 
     @Override
     public void clear() {
-        head.setParent(tail);
-        tail.setChild(head);
+        head.setPrevious(tail);
+        tail.setNext(head);
         size = 0;
     }
 
@@ -94,12 +94,12 @@ public class LinkedList implements List {
         }
 
         int i = 0;
-        Node current = tail.getChild();
-        while(current.getChild() != null) {
+        Node current = tail.getNext();
+        while(current.getNext() != null) {
             if(current.getData().equals(value)) {
                 return i;
             }
-            current = current.getChild();
+            current = current.getNext();
             i++;
         }
         return -1;
@@ -112,12 +112,12 @@ public class LinkedList implements List {
         }
 
         int i = size - 1;
-        Node current = head.getParent();
-        while(current.getParent() != null) {
+        Node current = head.getPrevious();
+        while(current.getPrevious() != null) {
             if(current.getData().equals(value)) {
                 return i;
             }
-            current = current.getParent();
+            current = current.getPrevious();
             i--;
         }
         return -1;
@@ -128,7 +128,7 @@ public class LinkedList implements List {
         StringJoiner string = new StringJoiner(", ", "[", "]");
         Node current = tail;
         for (int i = 0; i < size; i++) {
-            current = current.getChild();
+            current = current.getNext();
             string.add(current.getData().toString());
         }
         return string.toString();
@@ -149,11 +149,11 @@ public class LinkedList implements List {
     private Node getNodeFromTail(int index) {
         int i = -1;
         Node current = tail;
-        while(current.getChild() != null) {
+        while(current.getNext() != null) {
             if(index == i) {
                 return current;
             }
-            current = current.getChild();
+            current = current.getNext();
             i++;
         }
         return current;
@@ -162,11 +162,11 @@ public class LinkedList implements List {
     private Node getNodeFromHead(int index) {
         int i = size;
         Node current = head;
-        while(current.getParent() != null) {
+        while(current.getPrevious() != null) {
             if(index == i) {
                 return current;
             }
-            current = current.getParent();
+            current = current.getPrevious();
             i--;
         }
         return current;
