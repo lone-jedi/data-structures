@@ -26,10 +26,6 @@ public class LinkedList implements List {
             throw new NullPointerException("Null is not supported in LinkedList.add(). First argument is null");
         }
 
-        if(index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("Index " + index + " out of bound [0, " + size + "]");
-        }
-
         Node current = index == size ? head : getNode(index);
         Node previous = current.getParent();
         Node newNode = new Node(value, previous, current);
