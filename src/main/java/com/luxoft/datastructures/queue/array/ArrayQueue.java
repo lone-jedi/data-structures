@@ -1,4 +1,6 @@
-package com.luxoft.datastructures.queue;
+package com.luxoft.datastructures.queue.array;
+
+import com.luxoft.datastructures.queue.Queue;
 
 public class ArrayQueue implements Queue {
     private int rear;

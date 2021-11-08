@@ -1,4 +1,4 @@
-package com.luxoft.datastructures.list.linkedlist;
+package com.luxoft.datastructures.list.linked;
 
 public class Node {
     private Object data;

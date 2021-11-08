@@ -1,4 +1,4 @@
-package com.luxoft.datastructures.list.arraylist;
+package com.luxoft.datastructures.list.array;
 
 import com.luxoft.datastructures.list.List;
 

@@ -1,4 +1,4 @@
-package com.luxoft.datastructures.list.linkedlist;
+package com.luxoft.datastructures.list.linked;
 
 import com.luxoft.datastructures.list.List;
 import java.util.StringJoiner;

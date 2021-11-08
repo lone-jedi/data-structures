@@ -1,5 +1,6 @@
 package com.luxoft.datastructures.stack;
 
+import com.luxoft.datastructures.stack.array.ArrayStack;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

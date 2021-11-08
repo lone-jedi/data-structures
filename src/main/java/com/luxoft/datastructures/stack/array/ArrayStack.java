@@ -1,4 +1,6 @@
-package com.luxoft.datastructures.stack;
+package com.luxoft.datastructures.stack.array;
+
+import com.luxoft.datastructures.stack.Stack;
 
 // [A, B, C, D] size = 4 -> pop -> remove from array with index size - 1
 // [A, B] size = 1
