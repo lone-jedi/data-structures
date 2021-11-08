@@ -1,13 +1,12 @@
-package com.luxoft.datastructures.queue.array;
+package com.luxoft.datastructures.queue.linked;
 
 import com.luxoft.datastructures.queue.QueueTest;
 import org.junit.jupiter.api.BeforeEach;
 
-public class ArrayQueueTest extends QueueTest {
-
+public class LinkedQueueTest extends QueueTest {
     @Override
     @BeforeEach
     public void before() {
-        queue = new ArrayQueue();
+        queue = new LinkedQueue();
     }
 }
