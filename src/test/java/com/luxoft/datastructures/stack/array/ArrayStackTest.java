@@ -1,4 +1,4 @@
-package com.luxoft.datastructures.stack;
+package com.luxoft.datastructures.stack.array;
 
 import com.luxoft.datastructures.stack.array.ArrayStack;
 import org.junit.jupiter.api.Assertions;
