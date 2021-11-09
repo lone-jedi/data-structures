@@ -5,7 +5,7 @@ import com.luxoft.datastructures.list.List;
 import java.util.StringJoiner;
 
 public class ArrayList implements List {
-    private int head;
+    private int size;
     private Object[] arrayList;
 
     public ArrayList() {
@@ -21,7 +21,7 @@ public class ArrayList implements List {
 
     @Override
     public void add(Object value) {
-        add(value, head);
+        add(value, size);
     }
 
     @Override
@@ -30,37 +30,37 @@ public class ArrayList implements List {
             throw new NullPointerException("Null values are not support");
         }
 
-        if(index < 0 || index > head) {
+        if(index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bound");
         }
 
-        if(head >= arrayList.length) {
+        if(size >= arrayList.length) {
             resize();
         }
 
-        for (int i = head; i > index; --i) {
+        for (int i = size; i > index; --i) {
             arrayList[i] = arrayList[i - 1];
         }
 
         arrayList[index] = value;
-        head++;
+        size++;
     }
 
     @Override
     public Object remove(int index) {
-        if(index < 0 || index >= head) {
+        if(index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bound");
         }
 
         Object result = arrayList[index];
-        System.arraycopy(arrayList, index + 1, arrayList, index, head - index - 1);
-        arrayList[--head] = null;
+        System.arraycopy(arrayList, index + 1, arrayList, index, size - index - 1);
+        arrayList[--size] = null;
         return result;
     }
 
     @Override
     public Object get(int index) {
-        if(index < 0 || index >= head) {
+        if(index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bound");
         }
         return arrayList[index];
@@ -72,7 +72,7 @@ public class ArrayList implements List {
             throw new NullPointerException("Null values are not support");
         }
 
-        if(index < 0 || index >= head) {
+        if(index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bound");
         }
 
@@ -83,20 +83,20 @@ public class ArrayList implements List {
 
     @Override
     public void clear() {
-        for (int i = 0; i < head; i++) {
+        for (int i = 0; i < size; i++) {
             arrayList[i] = null;
         }
-        head = 0;
+        size = 0;
     }
 
     @Override
     public int size() {
-        return head;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return head == 0;
+        return size == 0;
     }
 
     @Override
@@ -110,7 +110,7 @@ public class ArrayList implements List {
             throw new NullPointerException("Null values are not support");
         }
 
-        for (int i = 0; i < head; i++) {
+        for (int i = 0; i < size; i++) {
             if(arrayList[i].equals(value)) {
                 return i;
             }
@@ -129,7 +129,7 @@ public class ArrayList implements List {
             return -1;
         }
 
-        for (int i = head - 1; i >= 0; --i) {
+        for (int i = size - 1; i >= 0; --i) {
             if(arrayList[i].equals(value)) {
                 return i;
             }
@@ -141,7 +141,7 @@ public class ArrayList implements List {
     @Override
     public String toString() {
         StringJoiner string = new StringJoiner(", ", "[", "]");
-        for (int i = 0; i < head; ++i) {
+        for (int i = 0; i < size; ++i) {
             string.add(arrayList[i].toString());
         }
         return string.toString();
