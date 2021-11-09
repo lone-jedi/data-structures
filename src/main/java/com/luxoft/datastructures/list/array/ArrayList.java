@@ -1,11 +1,10 @@
 package com.luxoft.datastructures.list.array;
 
-import com.luxoft.datastructures.list.List;
+import com.luxoft.datastructures.list.AbstractList;
 
 import java.util.StringJoiner;
 
-public class ArrayList implements List {
-    private int size;
+public class ArrayList extends AbstractList {
     private Object[] arrayList;
 
     public ArrayList() {
@@ -17,11 +16,6 @@ public class ArrayList implements List {
             throw new IllegalArgumentException("ArrayList size must be greater or equals to zero");
         }
         arrayList = new Object[size];
-    }
-
-    @Override
-    public void add(Object value) {
-        add(value, size);
     }
 
     @Override
@@ -87,21 +81,6 @@ public class ArrayList implements List {
             arrayList[i] = null;
         }
         size = 0;
-    }
-
-    @Override
-    public int size() {
-        return size;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    @Override
-    public boolean contains(Object value) {
-        return indexOf(value) != -1;
     }
 
     @Override

@@ -1,23 +1,17 @@
 package com.luxoft.datastructures.list.linked;
 
-import com.luxoft.datastructures.list.List;
+import com.luxoft.datastructures.list.AbstractList;
 import java.util.StringJoiner;
 
-public class LinkedList implements List {
+public class LinkedList extends AbstractList {
     private Node tail;
     private Node head;
-    private int size;
 
     public LinkedList() {
         tail = new Node();
         head = new Node();
         tail.setNext(head);
         head.setPrevious(tail);
-    }
-
-    @Override
-    public void add(Object value) {
-        add(value, size);
     }
 
     @Override
@@ -70,21 +64,6 @@ public class LinkedList implements List {
         head.setPrevious(tail);
         tail.setNext(head);
         size = 0;
-    }
-
-    @Override
-    public int size() {
-        return size;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size <= 0;
-    }
-
-    @Override
-    public boolean contains(Object value) {
-        return indexOf(value) != -1;
     }
 
     @Override
