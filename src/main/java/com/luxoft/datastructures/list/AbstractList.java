@@ -1,6 +1,8 @@
 package com.luxoft.datastructures.list;
 
-public abstract class AbstractList implements List {
+import java.util.Iterator;
+
+public abstract class AbstractList implements List, Iterable {
     protected int size;
 
     @Override
@@ -43,4 +45,23 @@ public abstract class AbstractList implements List {
 
     @Override
     public abstract int lastIndexOf(Object value);
+
+    @Override
+    public Iterator iterator() {
+        return new ListIterator();
+    }
+
+    private class ListIterator implements Iterator {
+        int index;
+
+        @Override
+        public boolean hasNext() {
+            return index < size;
+        }
+
+        @Override
+        public Object next() {
+            return get(index++);
+        }
+    }
 }

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 abstract public class ListTest {
-    protected List list;
+    protected AbstractList list;
 
     @BeforeEach
     abstract public void before();
@@ -374,6 +374,23 @@ abstract public class ListTest {
     @Test
     public void testToStringIfListIsEmpty() {
         assertEquals("[]", list.toString());
+    }
+
+    @Test
+    public void testIterator() {
+        list.add("Apple");
+        list.add("Pineapple");
+        list.add("Banana");
+
+        String expected = "ApplePineappleBanana";
+
+        StringBuilder actual = new StringBuilder();
+
+        for(Object value : list) {
+            actual.append(value.toString());
+        }
+
+        assertEquals(expected, actual.toString());
     }
 }
 
