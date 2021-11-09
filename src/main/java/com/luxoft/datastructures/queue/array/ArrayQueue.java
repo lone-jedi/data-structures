@@ -8,7 +8,7 @@ public class ArrayQueue implements Queue {
     private Object[] arrayQueue;
 
     public ArrayQueue() {
-        arrayQueue = new Object[100];
+        this(10);
     }
 
     public ArrayQueue(int size) {
