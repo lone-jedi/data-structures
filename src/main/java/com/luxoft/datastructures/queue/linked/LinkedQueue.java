@@ -19,10 +19,10 @@ public class LinkedQueue implements Queue {
             throw new NullPointerException("Null is not supported");
         }
 
-        Node next = tail.getNext();
+        Node next = tail.next;
         Node current = new Node(value, tail, next);
-        next.setPrevious(current);
-        tail.setNext(current);
+        next.previous = current;
+        tail.next = current;
         size++;
     }
 
@@ -32,12 +32,12 @@ public class LinkedQueue implements Queue {
             throw new IllegalStateException("Queue is empty");
         }
 
-        Node current = head.getPrevious();
-        Node previous = current.getPrevious();
-        previous.setNext(head);
-        head.setPrevious(previous);
+        Node current = head.previous;
+        Node previous = current.previous;
+        previous.next = head;
+        head.previous = previous;
         size--;
-        return current.getData();
+        return current.data;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class LinkedQueue implements Queue {
         if(isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
-        return head.getPrevious().getData();
+        return head.previous.data;
     }
 
     @Override
@@ -64,8 +64,8 @@ public class LinkedQueue implements Queue {
             throw new NullPointerException("Null is not supported");
         }
 
-        for(Node current = tail.getNext(); current.getNext() != null; current = current.getNext()) {
-            if(current.getData().equals(value)) {
+        for(Node current = tail.next; current.next != null; current = current.next) {
+            if(current.data.equals(value)) {
                 return true;
             }
         }
@@ -82,17 +82,31 @@ public class LinkedQueue implements Queue {
     @Override
     public String toString() {
         StringJoiner result = new StringJoiner(", ", "[", "]");
-        for(Node current = head.getPrevious(); current.getPrevious() != null; current = current.getPrevious()) {
-            result.add(current.getData().toString());
+        for(Node current = head.previous; current.previous != null; current = current.previous) {
+            result.add(current.data.toString());
         }
         return result.toString();
+    }
+
+    private static class Node {
+        Object data;
+        Node previous;
+        Node next;
+
+        Node() {}
+
+        Node(Object data, Node previous, Node next) {
+            this.data = data;
+            this.previous = previous;
+            this.next = next;
+        }
     }
 
     private void resetHeadAndTail() {
         tail = new Node();
         head = new Node();
 
-        head.setPrevious(tail);
-        tail.setNext(head);
+        head.previous = tail;
+        tail.next = head;
     }
 }
