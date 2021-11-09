@@ -10,8 +10,8 @@ public class LinkedList extends AbstractList {
     public LinkedList() {
         tail = new Node();
         head = new Node();
-        tail.setNext(head);
-        head.setPrevious(tail);
+        tail.next = head;
+        head.previous = tail;
     }
 
     @Override
@@ -21,27 +21,27 @@ public class LinkedList extends AbstractList {
         }
 
         Node current = index == size ? head : getNode(index);
-        Node previous = current.getPrevious();
+        Node previous = current.previous;
         Node newNode = new Node(value, previous, current);
-        current.setPrevious(newNode);
-        previous.setNext(newNode);
+        current.previous = newNode;
+        previous.next = newNode;
         size++;
     }
 
     @Override
     public Object remove(int index) {
         Node value = getNode(index);
-        Node previous = value.getPrevious();
-        Node next = value.getNext();
-        previous.setNext(next);
-        next.setPrevious(previous);
+        Node previous = value.previous;
+        Node next = value.next;
+        previous.next = next;
+        next.previous = previous;
         size--;
-        return value.getData();
+        return value.data;
     }
 
     @Override
     public Object get(int index) {
-        return getNode(index).getData();
+        return getNode(index).data;
     }
 
     @Override
@@ -51,18 +51,18 @@ public class LinkedList extends AbstractList {
         }
 
         Node oldValue = getNode(index);
-        Node previous = oldValue.getPrevious();
-        Node next = oldValue.getNext();
+        Node previous = oldValue.previous;
+        Node next = oldValue.next;
         Node newValue = new Node(value, previous, next);
-        previous.setNext(newValue);
-        next.setPrevious(newValue);
+        previous.next = newValue;
+        next.previous = newValue;
         return oldValue;
     }
 
     @Override
     public void clear() {
-        head.setPrevious(tail);
-        tail.setNext(head);
+        head.previous = tail;
+        tail.next = head;
         size = 0;
     }
 
@@ -73,12 +73,12 @@ public class LinkedList extends AbstractList {
         }
 
         int i = 0;
-        Node current = tail.getNext();
-        while(current.getNext() != null) {
-            if(current.getData().equals(value)) {
+        Node current = tail.next;
+        while(current.next != null) {
+            if(current.data.equals(value)) {
                 return i;
             }
-            current = current.getNext();
+            current = current.next;
             i++;
         }
         return -1;
@@ -91,12 +91,12 @@ public class LinkedList extends AbstractList {
         }
 
         int i = size - 1;
-        Node current = head.getPrevious();
-        while(current.getPrevious() != null) {
-            if(current.getData().equals(value)) {
+        Node current = head.previous;
+        while(current.previous != null) {
+            if(current.data.equals(value)) {
                 return i;
             }
-            current = current.getPrevious();
+            current = current.previous;
             i--;
         }
         return -1;
@@ -107,12 +107,26 @@ public class LinkedList extends AbstractList {
         StringJoiner string = new StringJoiner(", ", "[", "]");
         Node current = tail;
         for (int i = 0; i < size; i++) {
-            current = current.getNext();
-            string.add(current.getData().toString());
+            current = current.next;
+            string.add(current.data.toString());
         }
         return string.toString();
     }
 
+    private static class Node {
+        Object data;
+        Node previous;
+        Node next;
+        
+        Node() {}
+        
+        Node(Object data, Node previous, Node next) {
+            this.data = data;
+            this.previous = previous;
+            this.next = next;
+        }
+    }
+    
     private Node getNode(int index) {
         if(index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bound [0, " + size + "]");
@@ -128,11 +142,11 @@ public class LinkedList extends AbstractList {
     private Node getNodeFromTail(int index) {
         int i = -1;
         Node current = tail;
-        while(current.getNext() != null) {
+        while(current.next != null) {
             if(index == i) {
                 return current;
             }
-            current = current.getNext();
+            current = current.next;
             i++;
         }
         return current;
@@ -141,11 +155,11 @@ public class LinkedList extends AbstractList {
     private Node getNodeFromHead(int index) {
         int i = size;
         Node current = head;
-        while(current.getPrevious() != null) {
+        while(current.previous != null) {
             if(index == i) {
                 return current;
             }
-            current = current.getPrevious();
+            current = current.previous;
             i--;
         }
         return current;
