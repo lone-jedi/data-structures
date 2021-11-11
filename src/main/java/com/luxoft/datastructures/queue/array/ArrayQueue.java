@@ -26,7 +26,7 @@ public class ArrayQueue implements Queue {
         }
 
         if(arrayQueue.length == rear) {
-            expandSize();
+            ensureCapacity();
         }
 
         arrayQueue[rear++] = value;
@@ -103,12 +103,10 @@ public class ArrayQueue implements Queue {
         return result.toString();
     }
     
-    private void expandSize() {
+    private void ensureCapacity() {
         Object[] newArrayQueue = new Object[(int)((arrayQueue.length == 0 ? 2 : arrayQueue.length) * 1.5)];
 
-        for (int i = front, counter = 0; i < rear; ++i, ++counter) {
-            newArrayQueue[counter] = arrayQueue[i];
-        }
+        System.arraycopy(arrayQueue, front, newArrayQueue, 0, size());
 
         rear = size();
         front = 0;
