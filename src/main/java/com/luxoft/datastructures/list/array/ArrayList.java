@@ -117,15 +117,6 @@ public class ArrayList extends AbstractList {
         return -1;
     }
 
-    @Override
-    public String toString() {
-        StringJoiner string = new StringJoiner(", ", "[", "]");
-        for (int i = 0; i < size; ++i) {
-            string.add(arrayList[i].toString());
-        }
-        return string.toString();
-    }
-
     private void resize() {
         Object[] newArrayList = new Object[(int) ((arrayList.length == 0 ? 2 : arrayList.length) * 1.5)];
         System.arraycopy(arrayList, 0, newArrayList, 0, arrayList.length);

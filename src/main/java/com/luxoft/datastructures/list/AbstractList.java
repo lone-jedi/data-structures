@@ -1,6 +1,9 @@
 package com.luxoft.datastructures.list;
 
+import com.luxoft.datastructures.list.linked.LinkedList;
+
 import java.util.Iterator;
+import java.util.StringJoiner;
 
 public abstract class AbstractList implements List, Iterable {
     protected int size;
@@ -63,5 +66,14 @@ public abstract class AbstractList implements List, Iterable {
         public Object next() {
             return get(index++);
         }
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner result = new StringJoiner(", ", "[", "]");
+        for (Object o : this) {
+            result.add(o.toString());
+        }
+        return result.toString();
     }
 }
