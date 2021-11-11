@@ -27,7 +27,7 @@ public class ArrayList extends AbstractList {
         }
 
         if(size >= arrayList.length) {
-            resize();
+            ensureCapacity();
         }
 
         for (int i = size; i > index; --i) {
@@ -115,7 +115,7 @@ public class ArrayList extends AbstractList {
         return -1;
     }
 
-    private void resize() {
+    private void ensureCapacity() {
         Object[] newArrayList = new Object[(int) ((arrayList.length == 0 ? 2 : arrayList.length) * 1.5)];
         System.arraycopy(arrayList, 0, newArrayList, 0, arrayList.length);
         arrayList = newArrayList;
