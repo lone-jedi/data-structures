@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 abstract public class QueueTest {
-    protected Queue queue;
+    protected AbstractQueue queue;
 
     @BeforeEach
     abstract public void before();
@@ -241,5 +241,33 @@ abstract public class QueueTest {
     public void testContainsNullValue() {
         Assertions.assertThrows(NullPointerException.class,
                 () -> queue.contains(null));
+    }
+
+    @Test
+    public void testIterator() {
+        queue.enqueue("Apple");
+        queue.enqueue("Pineapple");
+        queue.enqueue("Banana");
+
+        String expected = "ApplePineappleBanana";
+
+        StringBuilder actual = new StringBuilder();
+
+        for(Object value : queue) {
+            actual.append(value.toString());
+        }
+
+        assertEquals(expected, actual.toString());
+    }
+
+    @Test
+    public void testIteratorWhenEmptyList() {
+        StringBuilder actual = new StringBuilder();
+
+        for(Object value : queue) {
+            actual.append(value.toString());
+        }
+
+        assertEquals("", actual.toString());
     }
 }

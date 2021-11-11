@@ -361,7 +361,7 @@ abstract public class ListTest {
 
 
     @Test
-    public void testToStringList() {
+    public void statustestToStringList() {
         list.add("Apple");
         list.add("Pineapple");
         list.add("Banana");
@@ -391,6 +391,17 @@ abstract public class ListTest {
         }
 
         assertEquals(expected, actual.toString());
+    }
+    
+    @Test
+    public void testIteratorWhenEmptyList() {
+        StringBuilder actual = new StringBuilder();
+
+        for(Object value : list) {
+            actual.append(value.toString());
+        }
+
+        assertEquals("", actual.toString());
     }
 }
 
