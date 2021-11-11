@@ -1,8 +1,8 @@
 package com.luxoft.datastructures.queue.array;
 
-import com.luxoft.datastructures.queue.Queue;
+import com.luxoft.datastructures.queue.AbstractQueue;
 
-public class ArrayQueue implements Queue {
+public class ArrayQueue extends AbstractQueue {
     private int rear;
     private int front;
     private Object[] arrayQueue;
@@ -56,26 +56,6 @@ public class ArrayQueue implements Queue {
     }
 
     @Override
-    public boolean isEmpty() {
-        return rear <= front;
-    }
-
-    @Override
-    public boolean contains(Object value) {
-        if(value == null) {
-            throw new NullPointerException("Null values are not supported");
-        }
-
-        for (int i = front; i < rear; ++i) {
-            if(arrayQueue[i].equals(value)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    @Override
     public void clear() {
         for (int i = front; i < rear; ++i) {
             arrayQueue[i] = null;
@@ -84,23 +64,12 @@ public class ArrayQueue implements Queue {
     }
 
     @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        result.append("[");
-
-        int i = front;
-        while(i < rear - 1) {
-            result.append(arrayQueue[i++]);
-            result.append(", ");
+    protected Object get(int index) {
+        if(index + front >= rear) {
+            throw new IndexOutOfBoundsException(
+                    "Index " + index + " out of bound in ArrayList [0, " + (size() - 1) + "]");
         }
-
-        if(i + 1 == rear) {
-            result.append(arrayQueue[i]);
-        }
-
-        result.append("]");
-
-        return result.toString();
+        return arrayQueue[index + front];
     }
     
     private void ensureCapacity() {

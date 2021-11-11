@@ -1,10 +1,11 @@
 package com.luxoft.datastructures.queue.linked;
 
+import com.luxoft.datastructures.queue.AbstractQueue;
 import com.luxoft.datastructures.queue.Queue;
 
 import java.util.StringJoiner;
 
-public class LinkedQueue implements Queue {
+public class LinkedQueue extends AbstractQueue {
     private Node head;
     private Node tail;
     private int size;
@@ -54,11 +55,6 @@ public class LinkedQueue implements Queue {
     }
 
     @Override
-    public boolean isEmpty() {
-        return size <= 0;
-    }
-
-    @Override
     public boolean contains(Object value) {
         if(value == null) {
             throw new NullPointerException("Null is not supported");
@@ -77,15 +73,6 @@ public class LinkedQueue implements Queue {
     public void clear() {
         resetHeadAndTail();
         size = 0;
-    }
-
-    @Override
-    public String toString() {
-        StringJoiner result = new StringJoiner(", ", "[", "]");
-        for(Node current = head.previous; current.previous != null; current = current.previous) {
-            result.add(current.data.toString());
-        }
-        return result.toString();
     }
 
     private static class Node {
@@ -108,5 +95,25 @@ public class LinkedQueue implements Queue {
 
         head.previous = tail;
         tail.next = head;
+    }
+
+    @Override
+    protected Object get(int index) {
+        if(index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException(
+                    "Index " + index + " out of bound in LinkedList [0, " + (size - 1) + "]");
+        }
+
+        int currentIndex = 0;
+        Node current = head.previous;
+        while(current.previous != null) {
+            if(currentIndex == index) {
+                return current.data;
+            }
+            current = current.previous;
+            currentIndex++;
+        }
+
+        throw new IllegalStateException("Element with index " + index + " not found");
     }
 }
