@@ -36,9 +36,7 @@ public abstract class AbstractQueue implements Queue, Iterable{
     }
 
     @Override
-    public void clear() {
-
-    }
+    public abstract void clear();
 
     @Override
     public Iterator iterator() {
