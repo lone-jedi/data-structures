@@ -1,9 +1,6 @@
 package com.luxoft.datastructures.queue.linked;
 
 import com.luxoft.datastructures.queue.AbstractQueue;
-import com.luxoft.datastructures.queue.Queue;
-
-import java.util.StringJoiner;
 
 public class LinkedQueue extends AbstractQueue {
     private Node head;

@@ -2,8 +2,6 @@ package com.luxoft.datastructures.list.array;
 
 import com.luxoft.datastructures.list.AbstractList;
 
-import java.util.StringJoiner;
-
 public class ArrayList extends AbstractList {
     private Object[] arrayList;
 

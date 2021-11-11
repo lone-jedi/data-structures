@@ -1,7 +1,5 @@
 package com.luxoft.datastructures.list;
 
-import com.luxoft.datastructures.list.linked.LinkedList;
-
 import java.util.Iterator;
 import java.util.StringJoiner;
 

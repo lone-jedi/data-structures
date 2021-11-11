@@ -1,7 +1,6 @@
 package com.luxoft.datastructures.list.linked;
 
 import com.luxoft.datastructures.list.AbstractList;
-import java.util.StringJoiner;
 
 public class LinkedList extends AbstractList {
     private Node tail;
