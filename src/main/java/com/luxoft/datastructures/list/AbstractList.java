@@ -33,7 +33,7 @@ public abstract class AbstractList implements List, Iterable {
 
     @Override
     public boolean isEmpty() {
-        return size <= 0;
+        return size == 0;
     }
 
     @Override
