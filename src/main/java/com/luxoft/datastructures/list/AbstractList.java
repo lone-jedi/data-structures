@@ -49,7 +49,7 @@ public abstract class AbstractList<T> implements List<T>, Iterable<T> {
 
         int index = 0;
         for (T current : this) {
-            if(current.equals(value)) {
+            if (current.equals(value)) {
                 return index;
             }
             index++;

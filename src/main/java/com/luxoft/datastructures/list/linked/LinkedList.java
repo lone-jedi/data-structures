@@ -17,7 +17,7 @@ public class LinkedList<T> extends AbstractList<T> {
 
     @Override
     public void add(T value, int index) {
-        if(value == null) {
+        if (value == null) {
             throw new NullPointerException("Null is not supported in LinkedList.add(). First argument is null");
         }
 
@@ -47,7 +47,7 @@ public class LinkedList<T> extends AbstractList<T> {
 
     @Override
     public T set(T value, int index) {
-        if(value == null) {
+        if (value == null) {
             throw new NullPointerException("Null is not supported");
         }
 
@@ -69,14 +69,14 @@ public class LinkedList<T> extends AbstractList<T> {
 
     @Override
     public int lastIndexOf(T value) {
-        if(value == null) {
+        if (value == null) {
             throw new NullPointerException("Null is not supported");
         }
 
         int i = size - 1;
         Node<T> current = head.previous;
-        while(current.previous != null) {
-            if(current.data.equals(value)) {
+        while (current.previous != null) {
+            if (current.data.equals(value)) {
                 return i;
             }
             current = current.previous;
@@ -90,7 +90,7 @@ public class LinkedList<T> extends AbstractList<T> {
         return new LinkedListIterator();
     }
 
-    private class LinkedListIterator implements Iterator{
+    private class LinkedListIterator implements Iterator<T> {
         private Node<T> current = tail.next;
 
         @Override
@@ -118,22 +118,23 @@ public class LinkedList<T> extends AbstractList<T> {
         T data;
         Node<T> previous;
         Node<T> next;
-        
-        Node() {}
-        
+
+        Node() {
+        }
+
         Node(T data, Node<T> previous, Node<T> next) {
             this.data = data;
             this.previous = previous;
             this.next = next;
         }
     }
-    
+
     private Node<T> getNode(int index) {
-        if(index < 0 || index >= size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bound [0, " + size + "]");
         }
 
-        if(index > size / 2) {
+        if (index > size / 2) {
             return getNodeFromHead(index);
         }
 
@@ -143,8 +144,8 @@ public class LinkedList<T> extends AbstractList<T> {
     private Node<T> getNodeFromTail(int index) {
         int i = -1;
         Node current = tail;
-        while(current.next != null) {
-            if(index == i) {
+        while (current.next != null) {
+            if (index == i) {
                 return current;
             }
             current = current.next;
@@ -156,8 +157,8 @@ public class LinkedList<T> extends AbstractList<T> {
     private Node<T> getNodeFromHead(int index) {
         int i = size;
         Node current = head;
-        while(current.previous != null) {
-            if(index == i) {
+        while (current.previous != null) {
+            if (index == i) {
                 return current;
             }
             current = current.previous;
