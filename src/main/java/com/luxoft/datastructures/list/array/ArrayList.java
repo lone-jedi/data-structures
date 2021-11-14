@@ -32,10 +32,7 @@ public class ArrayList extends AbstractList {
             ensureCapacity();
         }
 
-        for (int i = size; i > index; --i) {
-            arrayList[i] = arrayList[i - 1];
-        }
-
+        System.arraycopy(arrayList, index, arrayList, index + 1, size - index);
         arrayList[index] = value;
         size++;
     }
