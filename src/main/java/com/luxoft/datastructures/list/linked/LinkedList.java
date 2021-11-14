@@ -108,21 +108,27 @@ public class LinkedList extends AbstractList {
         return new LinkedListIterator();
     }
 
-    private static class LinkedListIterator implements Iterator{
+    private class LinkedListIterator implements Iterator{
+        private Node current = tail.next;
 
         @Override
         public boolean hasNext() {
-            return false;
+            return !current.equals(head);
         }
 
         @Override
         public Object next() {
-            return null;
+            current = current.next;
+            return current.previous.data;
         }
 
         @Override
         public void remove() {
-            Iterator.super.remove();
+            Node previous = current.previous;
+            Node next = current.next;
+            previous.next = next;
+            next.previous = previous;
+            current = next;
         }
     }
 
