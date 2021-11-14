@@ -4,10 +4,10 @@ import com.luxoft.datastructures.queue.AbstractQueue;
 
 import java.util.Iterator;
 
-public class ArrayQueue extends AbstractQueue {
+public class ArrayQueue<T> extends AbstractQueue<T> {
     private int rear;
     private int front;
-    private Object[] arrayQueue;
+    private T[] arrayQueue;
 
     public ArrayQueue() {
         this(10);
@@ -18,11 +18,11 @@ public class ArrayQueue extends AbstractQueue {
             throw new IllegalArgumentException("Size of queue must be more or equal zero");
         }
 
-        arrayQueue = new Object[size];
+        arrayQueue = (T[]) new Object[size];
     }
 
     @Override
-    public void enqueue(Object value) {
+    public void enqueue(T value) {
         if (value == null) {
             throw new NullPointerException("Null values are not supported");
         }
@@ -35,7 +35,7 @@ public class ArrayQueue extends AbstractQueue {
     }
 
     @Override
-    public Object dequeue() {
+    public T dequeue() {
         if (isEmpty()) {
             throw new IllegalStateException("Try to dequeue value from empty queue");
         }
@@ -44,7 +44,7 @@ public class ArrayQueue extends AbstractQueue {
     }
 
     @Override
-    public Object peek() {
+    public T peek() {
         if (isEmpty()) {
             throw new IllegalStateException("Try to peek value from empty queue");
         }
@@ -70,7 +70,7 @@ public class ArrayQueue extends AbstractQueue {
         return new ArrayQueueIterator();
     }
 
-    private class ArrayQueueIterator implements Iterator {
+    private class ArrayQueueIterator implements Iterator<T> {
         private int index = front;
 
         @Override
@@ -79,7 +79,7 @@ public class ArrayQueue extends AbstractQueue {
         }
 
         @Override
-        public Object next() {
+        public T next() {
             return arrayQueue[index++];
         }
 
@@ -92,7 +92,7 @@ public class ArrayQueue extends AbstractQueue {
     }
 
     private void ensureCapacity() {
-        Object[] newArrayQueue = new Object[(int) ((arrayQueue.length == 0 ? 2 : arrayQueue.length) * 1.5)];
+        T[] newArrayQueue = (T[]) new Object[(int) ((arrayQueue.length == 0 ? 2 : arrayQueue.length) * 1.5)];
 
         System.arraycopy(arrayQueue, front, newArrayQueue, 0, size());
 

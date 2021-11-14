@@ -5,9 +5,9 @@ import com.luxoft.datastructures.queue.AbstractQueue;
 
 import java.util.Iterator;
 
-public class LinkedQueue extends AbstractQueue {
-    private Node head;
-    private Node tail;
+public class LinkedQueue<T> extends AbstractQueue<T> {
+    private Node<T> head;
+    private Node<T> tail;
     private int size;
 
     public LinkedQueue() {
@@ -15,26 +15,26 @@ public class LinkedQueue extends AbstractQueue {
     }
 
     @Override
-    public void enqueue(Object value) {
+    public void enqueue(T value) {
         if (value == null) {
             throw new NullPointerException("Null is not supported");
         }
 
-        Node next = tail.next;
-        Node current = new Node(value, tail, next);
+        Node<T> next = tail.next;
+        Node<T> current = new Node(value, tail, next);
         next.previous = current;
         tail.next = current;
         size++;
     }
 
     @Override
-    public Object dequeue() {
+    public T dequeue() {
         if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
 
-        Node current = head.previous;
-        Node previous = current.previous;
+        Node<T> current = head.previous;
+        Node<T> previous = current.previous;
         previous.next = head;
         head.previous = previous;
         size--;
@@ -42,7 +42,7 @@ public class LinkedQueue extends AbstractQueue {
     }
 
     @Override
-    public Object peek() {
+    public T peek() {
         if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
@@ -65,8 +65,8 @@ public class LinkedQueue extends AbstractQueue {
         return new LinkedListIterator();
     }
 
-    private class LinkedListIterator implements Iterator {
-        private Node current = head.previous;
+    private class LinkedListIterator implements Iterator<T> {
+        private Node<T> current = head.previous;
 
         @Override
         public boolean hasNext() {
@@ -74,30 +74,30 @@ public class LinkedQueue extends AbstractQueue {
         }
 
         @Override
-        public Object next() {
+        public T next() {
             current = current.previous;
             return current.next.data;
         }
 
         @Override
         public void remove() {
-            Node previous = current.previous;
-            Node next = current.next;
+            Node<T> previous = current.previous;
+            Node<T> next = current.next;
             previous.next = next;
             next.previous = previous;
             current = previous;
         }
     }
 
-    private static class Node {
-        Object data;
-        Node previous;
-        Node next;
+    private static class Node<T> {
+        T data;
+        Node<T> previous;
+        Node<T> next;
 
         Node() {
         }
 
-        Node(Object data, Node previous, Node next) {
+        Node(T data, Node<T> previous, Node<T> next) {
             this.data = data;
             this.previous = previous;
             this.next = next;
@@ -105,8 +105,8 @@ public class LinkedQueue extends AbstractQueue {
     }
 
     private void resetHeadAndTail() {
-        tail = new Node();
-        head = new Node();
+        tail = new Node<T>();
+        head = new Node<T>();
 
         head.previous = tail;
         tail.next = head;

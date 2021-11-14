@@ -3,15 +3,15 @@ package com.luxoft.datastructures.queue;
 import java.util.Iterator;
 import java.util.StringJoiner;
 
-public abstract class AbstractQueue implements Queue, Iterable {
+public abstract class AbstractQueue<T> implements Queue<T>, Iterable<T> {
     @Override
-    public abstract void enqueue(Object value);
+    public abstract void enqueue(T value);
 
     @Override
-    public abstract Object dequeue();
+    public abstract T dequeue();
 
     @Override
-    public abstract Object peek();
+    public abstract T peek();
 
     @Override
     public abstract int size();
@@ -22,12 +22,12 @@ public abstract class AbstractQueue implements Queue, Iterable {
     }
 
     @Override
-    public boolean contains(Object value) {
+    public boolean contains(T value) {
         if (value == null) {
             throw new NullPointerException("Null values are not supported");
         }
 
-        for (Object current : this) {
+        for (T current : this) {
             if (current.equals(value)) {
                 return true;
             }
@@ -44,7 +44,7 @@ public abstract class AbstractQueue implements Queue, Iterable {
     @Override
     public String toString() {
         StringJoiner result = new StringJoiner(", ", "[", "]");
-        for (Object o : this) {
+        for (T o : this) {
             result.add(o.toString());
         }
         return result.toString();
