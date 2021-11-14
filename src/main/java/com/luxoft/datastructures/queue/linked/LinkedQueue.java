@@ -1,5 +1,6 @@
 package com.luxoft.datastructures.queue.linked;
 
+import com.luxoft.datastructures.list.linked.LinkedList;
 import com.luxoft.datastructures.queue.AbstractQueue;
 
 import java.util.Iterator;
@@ -79,21 +80,27 @@ public class LinkedQueue extends AbstractQueue {
         return new LinkedListIterator();
     }
 
-    private static class LinkedListIterator implements Iterator {
+    private class LinkedListIterator implements Iterator {
+        private Node current = head.previous;
 
         @Override
         public boolean hasNext() {
-            return false;
+            return !current.equals(tail);
         }
 
         @Override
         public Object next() {
-            return null;
+            current = current.previous;
+            return current.next.data;
         }
 
         @Override
         public void remove() {
-            Iterator.super.remove();
+            Node previous = current.previous;
+            Node next = current.next;
+            previous.next = next;
+            next.previous = previous;
+            current = previous;
         }
     }
 
