@@ -68,24 +68,6 @@ public class LinkedList extends AbstractList {
     }
 
     @Override
-    public int indexOf(Object value) {
-        if(value == null) {
-            throw new NullPointerException("Null is not supported");
-        }
-
-        int i = 0;
-        Node current = tail.next;
-        while(current.next != null) {
-            if(current.data.equals(value)) {
-                return i;
-            }
-            current = current.next;
-            i++;
-        }
-        return -1;
-    }
-
-    @Override
     public int lastIndexOf(Object value) {
         if(value == null) {
             throw new NullPointerException("Null is not supported");

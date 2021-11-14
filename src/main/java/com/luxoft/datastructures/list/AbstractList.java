@@ -42,7 +42,21 @@ public abstract class AbstractList implements List, Iterable {
     }
 
     @Override
-    public abstract int indexOf(Object value);
+    public int indexOf(Object value) {
+        if (value == null) {
+            throw new NullPointerException("Null values are not support");
+        }
+
+        int index = 0;
+        for (Object current : this) {
+            if(current.equals(value)) {
+                return index;
+            }
+            index++;
+        }
+
+        return -1;
+    }
 
     @Override
     public abstract int lastIndexOf(Object value);

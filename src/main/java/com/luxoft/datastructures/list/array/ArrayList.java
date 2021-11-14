@@ -84,21 +84,6 @@ public class ArrayList extends AbstractList {
     }
 
     @Override
-    public int indexOf(Object value) {
-        if (value == null) {
-            throw new NullPointerException("Null values are not support");
-        }
-
-        for (int i = 0; i < size; i++) {
-            if (arrayList[i].equals(value)) {
-                return i;
-            }
-        }
-
-        return -1;
-    }
-
-    @Override
     public int lastIndexOf(Object value) {
         if (value == null) {
             throw new NullPointerException("Null values are not support");
