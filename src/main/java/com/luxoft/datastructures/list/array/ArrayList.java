@@ -122,21 +122,21 @@ public class ArrayList extends AbstractList {
         return new ArrayListIterator();
     }
 
-    private static class ArrayListIterator implements Iterator{
+    private class ArrayListIterator implements Iterator{
+        private int index;
 
         @Override
         public boolean hasNext() {
-            return false;
+            return size != index;
         }
 
         @Override
         public Object next() {
-            return null;
+            return arrayList[index++];
         }
 
-        @Override
         public void remove() {
-            Iterator.super.remove();
+            ArrayList.this.remove(index);
         }
     }
 
