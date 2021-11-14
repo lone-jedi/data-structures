@@ -12,7 +12,7 @@ public class ArrayList extends AbstractList {
     }
 
     public ArrayList(int size) {
-        if(size < 0) {
+        if (size < 0) {
             throw new IllegalArgumentException("ArrayList size must be greater or equals to zero");
         }
         arrayList = new Object[size];
@@ -20,15 +20,15 @@ public class ArrayList extends AbstractList {
 
     @Override
     public void add(Object value, int index) {
-        if(value == null) {
+        if (value == null) {
             throw new NullPointerException("Null values are not support");
         }
 
-        if(index < 0 || index > size) {
+        if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bound");
         }
 
-        if(size >= arrayList.length) {
+        if (size >= arrayList.length) {
             ensureCapacity();
         }
 
@@ -42,7 +42,7 @@ public class ArrayList extends AbstractList {
 
     @Override
     public Object remove(int index) {
-        if(index < 0 || index >= size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bound");
         }
 
@@ -54,7 +54,7 @@ public class ArrayList extends AbstractList {
 
     @Override
     public Object get(int index) {
-        if(index < 0 || index >= size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bound");
         }
         return arrayList[index];
@@ -62,11 +62,11 @@ public class ArrayList extends AbstractList {
 
     @Override
     public Object set(Object value, int index) {
-        if(value == null) {
+        if (value == null) {
             throw new NullPointerException("Null values are not support");
         }
 
-        if(index < 0 || index >= size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bound");
         }
 
@@ -85,12 +85,12 @@ public class ArrayList extends AbstractList {
 
     @Override
     public int indexOf(Object value) {
-        if(value == null) {
+        if (value == null) {
             throw new NullPointerException("Null values are not support");
         }
 
         for (int i = 0; i < size; i++) {
-            if(arrayList[i].equals(value)) {
+            if (arrayList[i].equals(value)) {
                 return i;
             }
         }
@@ -100,16 +100,16 @@ public class ArrayList extends AbstractList {
 
     @Override
     public int lastIndexOf(Object value) {
-        if(value == null) {
+        if (value == null) {
             throw new NullPointerException("Null values are not support");
         }
 
-        if(isEmpty()) {
+        if (isEmpty()) {
             return -1;
         }
 
         for (int i = size - 1; i >= 0; --i) {
-            if(arrayList[i].equals(value)) {
+            if (arrayList[i].equals(value)) {
                 return i;
             }
         }
@@ -122,7 +122,7 @@ public class ArrayList extends AbstractList {
         return new ArrayListIterator();
     }
 
-    private class ArrayListIterator implements Iterator{
+    private class ArrayListIterator implements Iterator {
         private int index;
 
         @Override
