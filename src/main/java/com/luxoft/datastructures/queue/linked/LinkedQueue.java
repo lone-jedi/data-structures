@@ -55,21 +55,6 @@ public class LinkedQueue extends AbstractQueue {
     }
 
     @Override
-    public boolean contains(Object value) {
-        if (value == null) {
-            throw new NullPointerException("Null is not supported");
-        }
-
-        for (Node current = tail.next; current.next != null; current = current.next) {
-            if (current.data.equals(value)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    @Override
     public void clear() {
         resetHeadAndTail();
         size = 0;
