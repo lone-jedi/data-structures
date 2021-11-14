@@ -2,6 +2,8 @@ package com.luxoft.datastructures.list.linked;
 
 import com.luxoft.datastructures.list.AbstractList;
 
+import java.util.Iterator;
+
 public class LinkedList extends AbstractList {
     private Node tail;
     private Node head;
@@ -99,6 +101,29 @@ public class LinkedList extends AbstractList {
             i--;
         }
         return -1;
+    }
+
+    @Override
+    public Iterator iterator() {
+        return new LinkedListIterator();
+    }
+
+    private static class LinkedListIterator implements Iterator{
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public Object next() {
+            return null;
+        }
+
+        @Override
+        public void remove() {
+            Iterator.super.remove();
+        }
     }
 
     private static class Node {

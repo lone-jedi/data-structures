@@ -2,6 +2,8 @@ package com.luxoft.datastructures.list.array;
 
 import com.luxoft.datastructures.list.AbstractList;
 
+import java.util.Iterator;
+
 public class ArrayList extends AbstractList {
     private Object[] arrayList;
 
@@ -113,6 +115,29 @@ public class ArrayList extends AbstractList {
         }
 
         return -1;
+    }
+
+    @Override
+    public Iterator iterator() {
+        return new ArrayListIterator();
+    }
+
+    private static class ArrayListIterator implements Iterator{
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public Object next() {
+            return null;
+        }
+
+        @Override
+        public void remove() {
+            Iterator.super.remove();
+        }
     }
 
     private void ensureCapacity() {
