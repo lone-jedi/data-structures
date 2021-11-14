@@ -3,25 +3,25 @@ package com.luxoft.datastructures.list;
 import java.util.Iterator;
 import java.util.StringJoiner;
 
-public abstract class AbstractList implements List, Iterable {
+public abstract class AbstractList<T> implements List<T>, Iterable<T> {
     protected int size;
 
     @Override
-    public void add(Object value) {
+    public void add(T value) {
         add(value, size);
     }
 
     @Override
-    public abstract void add(Object value, int index);
+    public abstract void add(T value, int index);
 
     @Override
-    public abstract Object remove(int index);
+    public abstract T remove(int index);
 
     @Override
-    public abstract Object get(int index);
+    public abstract T get(int index);
 
     @Override
-    public abstract Object set(Object value, int index);
+    public abstract T set(T value, int index);
 
     @Override
     public abstract void clear();
@@ -37,18 +37,18 @@ public abstract class AbstractList implements List, Iterable {
     }
 
     @Override
-    public boolean contains(Object value) {
+    public boolean contains(T value) {
         return indexOf(value) != -1;
     }
 
     @Override
-    public int indexOf(Object value) {
+    public int indexOf(T value) {
         if (value == null) {
             throw new NullPointerException("Null values are not support");
         }
 
         int index = 0;
-        for (Object current : this) {
+        for (T current : this) {
             if(current.equals(value)) {
                 return index;
             }
@@ -59,7 +59,7 @@ public abstract class AbstractList implements List, Iterable {
     }
 
     @Override
-    public abstract int lastIndexOf(Object value);
+    public abstract int lastIndexOf(T value);
 
     @Override
     public abstract Iterator iterator();
@@ -67,7 +67,7 @@ public abstract class AbstractList implements List, Iterable {
     @Override
     public String toString() {
         StringJoiner result = new StringJoiner(", ", "[", "]");
-        for (Object o : this) {
+        for (T o : this) {
             result.add(o.toString());
         }
         return result.toString();

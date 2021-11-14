@@ -4,11 +4,11 @@ import com.luxoft.datastructures.list.AbstractList;
 
 import java.util.Iterator;
 
-public class ArrayList extends AbstractList {
+public class ArrayList<T> extends AbstractList<T> {
     public static final int INITIAL_CAPACITY = 10;
     public static final double ENSURE_CAPACITY_RATE = 1.5;
 
-    private Object[] arrayList;
+    private T[] arrayList;
 
     public ArrayList() {
         this(INITIAL_CAPACITY);
@@ -18,11 +18,11 @@ public class ArrayList extends AbstractList {
         if (size < 0) {
             throw new IllegalArgumentException("ArrayList size must be greater or equals to zero");
         }
-        arrayList = new Object[size];
+        arrayList = (T[]) new Object[size]; // ????
     }
 
     @Override
-    public void add(Object value, int index) {
+    public void add(T value, int index) {
         if (value == null) {
             throw new NullPointerException("Null values are not support");
         }
@@ -41,19 +41,19 @@ public class ArrayList extends AbstractList {
     }
 
     @Override
-    public Object remove(int index) {
+    public T remove(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bound");
         }
 
-        Object result = arrayList[index];
+        T result = arrayList[index];
         System.arraycopy(arrayList, index + 1, arrayList, index, size - index - 1);
         arrayList[--size] = null;
         return result;
     }
 
     @Override
-    public Object get(int index) {
+    public T get(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bound");
         }
@@ -61,7 +61,7 @@ public class ArrayList extends AbstractList {
     }
 
     @Override
-    public Object set(Object value, int index) {
+    public T set(T value, int index) {
         if (value == null) {
             throw new NullPointerException("Null values are not support");
         }
@@ -70,7 +70,7 @@ public class ArrayList extends AbstractList {
             throw new IndexOutOfBoundsException("Index " + index + " out of bound");
         }
 
-        Object result = arrayList[index];
+        T result = arrayList[index];
         arrayList[index] = value;
         return result;
     }
@@ -84,7 +84,7 @@ public class ArrayList extends AbstractList {
     }
 
     @Override
-    public int lastIndexOf(Object value) {
+    public int lastIndexOf(T value) {
         if (value == null) {
             throw new NullPointerException("Null values are not support");
         }
@@ -116,7 +116,7 @@ public class ArrayList extends AbstractList {
         }
 
         @Override
-        public Object next() {
+        public T next() {
             return arrayList[index++];
         }
 
@@ -126,8 +126,8 @@ public class ArrayList extends AbstractList {
     }
 
     private void ensureCapacity() {
-        Object[] newArrayList = new Object[
-                (int) ((arrayList.length == 0 ? 2 : arrayList.length) * ENSURE_CAPACITY_RATE)];
+        T[] newArrayList = (T[]) new Object[
+                (int) ((arrayList.length == 0 ? 2 : arrayList.length) * ENSURE_CAPACITY_RATE)]; // ????
         System.arraycopy(arrayList, 0, newArrayList, 0, arrayList.length);
         arrayList = newArrayList;
     }
