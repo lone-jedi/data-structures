@@ -5,10 +5,13 @@ import com.luxoft.datastructures.list.AbstractList;
 import java.util.Iterator;
 
 public class ArrayList extends AbstractList {
+    public static final int INITIAL_CAPACITY = 10;
+    public static final double ENSURE_CAPACITY_RATE = 1.5;
+
     private Object[] arrayList;
 
     public ArrayList() {
-        this(10);
+        this(INITIAL_CAPACITY);
     }
 
     public ArrayList(int size) {
@@ -123,7 +126,8 @@ public class ArrayList extends AbstractList {
     }
 
     private void ensureCapacity() {
-        Object[] newArrayList = new Object[(int) ((arrayList.length == 0 ? 2 : arrayList.length) * 1.5)];
+        Object[] newArrayList = new Object[
+                (int) ((arrayList.length == 0 ? 2 : arrayList.length) * ENSURE_CAPACITY_RATE)];
         System.arraycopy(arrayList, 0, newArrayList, 0, arrayList.length);
         arrayList = newArrayList;
     }
