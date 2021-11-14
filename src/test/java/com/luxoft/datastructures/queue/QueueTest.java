@@ -5,7 +5,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.Iterator;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 abstract public class QueueTest {
     protected AbstractQueue queue;
@@ -244,30 +247,64 @@ abstract public class QueueTest {
     }
 
     @Test
-    public void testIterator() {
+    public void runIteratorOnStringList() {
         queue.enqueue("Apple");
         queue.enqueue("Pineapple");
         queue.enqueue("Banana");
 
-        String expected = "ApplePineappleBanana";
+        Iterator iterator = queue.iterator();
+        assertTrue(iterator.hasNext());
 
-        StringBuilder actual = new StringBuilder();
-
-        for(Object value : queue) {
-            actual.append(value.toString());
-        }
-
-        assertEquals(expected, actual.toString());
+        Object value = iterator.next();
+        assertEquals("Apple", value);
+        assertTrue(iterator.hasNext());
+        value = iterator.next();
+        assertEquals("Pineapple", value);
+        assertTrue(iterator.hasNext());
+        value = iterator.next();
+        assertEquals("Banana", value);
+        assertFalse(iterator.hasNext());
     }
 
     @Test
-    public void testIteratorWhenEmptyList() {
-        StringBuilder actual = new StringBuilder();
+    public void runIteratorWhenEmptyList() {
+        Iterator iterator = queue.iterator();
+        assertFalse(iterator.hasNext());
+    }
 
-        for(Object value : queue) {
-            actual.append(value.toString());
-        }
+    @Test
+    public void removeItemFromListUsingIterator() {
+        queue.enqueue("Apple");
+        queue.enqueue("Pineapple");
+        queue.enqueue("Banana");
 
-        assertEquals("", actual.toString());
+        Iterator iterator = queue.iterator();
+
+        assertTrue(iterator.hasNext());
+        Object value = iterator.next();
+        assertEquals("Apple", value);
+
+        assertTrue(iterator.hasNext());
+        iterator.remove(); // Pineapple
+
+        assertTrue(iterator.hasNext());
+        value = iterator.next();
+        assertEquals("Banana", value);
+
+        assertFalse(iterator.hasNext());
+
+
+        Iterator secondIterator = queue.iterator();
+
+        assertTrue(secondIterator.hasNext());
+        secondIterator.remove(); // Apple
+
+        assertTrue(secondIterator.hasNext());
+        secondIterator.remove(); // Banana
+
+        assertFalse(secondIterator.hasNext());
+
+        Iterator thirdIterator = queue.iterator();
+        assertFalse(thirdIterator.hasNext());
     }
 }
