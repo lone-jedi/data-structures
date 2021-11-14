@@ -3,7 +3,7 @@ package com.luxoft.datastructures.queue;
 import java.util.Iterator;
 import java.util.StringJoiner;
 
-public abstract class AbstractQueue implements Queue, Iterable{
+public abstract class AbstractQueue implements Queue, Iterable {
     @Override
     public abstract void enqueue(Object value);
 
@@ -23,12 +23,12 @@ public abstract class AbstractQueue implements Queue, Iterable{
 
     @Override
     public boolean contains(Object value) {
-        if(value == null) {
+        if (value == null) {
             throw new NullPointerException("Null values are not supported");
         }
 
-        for(Object current : this) {
-            if(current.equals(value)) {
+        for (Object current : this) {
+            if (current.equals(value)) {
                 return true;
             }
         }
@@ -39,25 +39,7 @@ public abstract class AbstractQueue implements Queue, Iterable{
     public abstract void clear();
 
     @Override
-    public Iterator iterator() {
-        return new QueueIterator();
-    }
-
-    private class QueueIterator implements Iterator{
-        int index;
-
-        @Override
-        public boolean hasNext() {
-            return index < size();
-        }
-
-        @Override
-        public Object next() {
-            return get(index++);
-        }
-    }
-
-    protected abstract Object get(int index);
+    public abstract Iterator iterator();
 
     @Override
     public String toString() {

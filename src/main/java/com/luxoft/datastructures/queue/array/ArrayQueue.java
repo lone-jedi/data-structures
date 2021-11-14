@@ -2,6 +2,8 @@ package com.luxoft.datastructures.queue.array;
 
 import com.luxoft.datastructures.queue.AbstractQueue;
 
+import java.util.Iterator;
+
 public class ArrayQueue extends AbstractQueue {
     private int rear;
     private int front;
@@ -12,7 +14,7 @@ public class ArrayQueue extends AbstractQueue {
     }
 
     public ArrayQueue(int size) {
-        if(size < 0) {
+        if (size < 0) {
             throw new IllegalArgumentException("Size of queue must be more or equal zero");
         }
 
@@ -21,11 +23,11 @@ public class ArrayQueue extends AbstractQueue {
 
     @Override
     public void enqueue(Object value) {
-        if(value == null) {
+        if (value == null) {
             throw new NullPointerException("Null values are not supported");
         }
 
-        if(arrayQueue.length == rear) {
+        if (arrayQueue.length == rear) {
             ensureCapacity();
         }
 
@@ -34,7 +36,7 @@ public class ArrayQueue extends AbstractQueue {
 
     @Override
     public Object dequeue() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             throw new IllegalStateException("Try to dequeue value from empty queue");
         }
 
@@ -43,7 +45,7 @@ public class ArrayQueue extends AbstractQueue {
 
     @Override
     public Object peek() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             throw new IllegalStateException("Try to peek value from empty queue");
         }
 
@@ -64,16 +66,33 @@ public class ArrayQueue extends AbstractQueue {
     }
 
     @Override
-    protected Object get(int index) {
-        if(index + front >= rear) {
-            throw new IndexOutOfBoundsException(
-                    "Index " + index + " out of bound in ArrayList [0, " + (size() - 1) + "]");
-        }
-        return arrayQueue[index + front];
+    public Iterator iterator() {
+        return new ArrayQueueIterator();
     }
-    
+
+    private class ArrayQueueIterator implements Iterator {
+        private int index = front;
+
+        @Override
+        public boolean hasNext() {
+            return index != rear;
+        }
+
+        @Override
+        public Object next() {
+            return arrayQueue[index++];
+        }
+
+        @Override
+        public void remove() {
+            arrayQueue[index] = null;
+            System.arraycopy(arrayQueue, index + 1, arrayQueue, index, rear - index);
+            rear--;
+        }
+    }
+
     private void ensureCapacity() {
-        Object[] newArrayQueue = new Object[(int)((arrayQueue.length == 0 ? 2 : arrayQueue.length) * 1.5)];
+        Object[] newArrayQueue = new Object[(int) ((arrayQueue.length == 0 ? 2 : arrayQueue.length) * 1.5)];
 
         System.arraycopy(arrayQueue, front, newArrayQueue, 0, size());
 

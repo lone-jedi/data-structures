@@ -2,6 +2,8 @@ package com.luxoft.datastructures.queue.linked;
 
 import com.luxoft.datastructures.queue.AbstractQueue;
 
+import java.util.Iterator;
+
 public class LinkedQueue extends AbstractQueue {
     private Node head;
     private Node tail;
@@ -13,7 +15,7 @@ public class LinkedQueue extends AbstractQueue {
 
     @Override
     public void enqueue(Object value) {
-        if(value == null) {
+        if (value == null) {
             throw new NullPointerException("Null is not supported");
         }
 
@@ -26,7 +28,7 @@ public class LinkedQueue extends AbstractQueue {
 
     @Override
     public Object dequeue() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
 
@@ -40,7 +42,7 @@ public class LinkedQueue extends AbstractQueue {
 
     @Override
     public Object peek() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
         return head.previous.data;
@@ -53,12 +55,12 @@ public class LinkedQueue extends AbstractQueue {
 
     @Override
     public boolean contains(Object value) {
-        if(value == null) {
+        if (value == null) {
             throw new NullPointerException("Null is not supported");
         }
 
-        for(Node current = tail.next; current.next != null; current = current.next) {
-            if(current.data.equals(value)) {
+        for (Node current = tail.next; current.next != null; current = current.next) {
+            if (current.data.equals(value)) {
                 return true;
             }
         }
@@ -72,12 +74,36 @@ public class LinkedQueue extends AbstractQueue {
         size = 0;
     }
 
+    @Override
+    public Iterator iterator() {
+        return new LinkedListIterator();
+    }
+
+    private static class LinkedListIterator implements Iterator {
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public Object next() {
+            return null;
+        }
+
+        @Override
+        public void remove() {
+            Iterator.super.remove();
+        }
+    }
+
     private static class Node {
         Object data;
         Node previous;
         Node next;
 
-        Node() {}
+        Node() {
+        }
 
         Node(Object data, Node previous, Node next) {
             this.data = data;
@@ -92,25 +118,5 @@ public class LinkedQueue extends AbstractQueue {
 
         head.previous = tail;
         tail.next = head;
-    }
-
-    @Override
-    protected Object get(int index) {
-        if(index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException(
-                    "Index " + index + " out of bound in LinkedList [0, " + (size - 1) + "]");
-        }
-
-        int currentIndex = 0;
-        Node current = head.previous;
-        while(current.previous != null) {
-            if(currentIndex == index) {
-                return current.data;
-            }
-            current = current.previous;
-            currentIndex++;
-        }
-
-        throw new IllegalStateException("Element with index " + index + " not found");
     }
 }
