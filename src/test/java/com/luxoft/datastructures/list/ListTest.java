@@ -417,8 +417,6 @@ abstract public class ListTest {
         assertEquals("Apple", value);
 
         assertTrue(iterator.hasNext());
-        value = iterator.next();
-        assertEquals("Pineapple", value);
         iterator.remove(); // Pineapple
 
         assertTrue(iterator.hasNext());
@@ -431,14 +429,10 @@ abstract public class ListTest {
         Iterator secondIterator = list.iterator();
 
         assertTrue(secondIterator.hasNext());
-        value = secondIterator.next();
-        assertEquals("Apple", value);
-        iterator.remove(); // Apple
+        secondIterator.remove(); // Apple
 
         assertTrue(secondIterator.hasNext());
-        value = secondIterator.next();
-        assertEquals("Banana", value);
-        iterator.remove(); // Banana
+        secondIterator.remove(); // Banana
 
         assertFalse(secondIterator.hasNext());
 
