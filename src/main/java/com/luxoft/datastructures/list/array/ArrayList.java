@@ -5,8 +5,8 @@ import com.luxoft.datastructures.list.AbstractList;
 import java.util.Iterator;
 
 public class ArrayList<T> extends AbstractList<T> {
-    public static final int INITIAL_CAPACITY = 10;
-    public static final double ENSURE_CAPACITY_RATE = 1.5;
+    private static final int INITIAL_CAPACITY = 10;
+    private static final double ENSURE_CAPACITY_RATE = 1.5;
 
     private T[] arrayList;
 
