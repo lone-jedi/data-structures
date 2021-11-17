@@ -127,7 +127,7 @@ public class ArrayList<T> extends AbstractList<T> {
 
     private void ensureCapacity() {
         T[] newArrayList = (T[]) new Object[
-                (int) ((arrayList.length == 0 ? 2 : arrayList.length) * ENSURE_CAPACITY_RATE)]; // ????
+                (int) (arrayList.length * ENSURE_CAPACITY_RATE) + 1];
         System.arraycopy(arrayList, 0, newArrayList, 0, arrayList.length);
         arrayList = newArrayList;
     }

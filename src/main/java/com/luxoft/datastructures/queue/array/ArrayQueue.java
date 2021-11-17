@@ -92,7 +92,7 @@ public class ArrayQueue<T> extends AbstractQueue<T> {
     }
 
     private void ensureCapacity() {
-        T[] newArrayQueue = (T[]) new Object[(int) ((arrayQueue.length == 0 ? 2 : arrayQueue.length) * 1.5)];
+        T[] newArrayQueue = (T[]) new Object[(int) (arrayQueue.length * 1.5) + 1];
 
         System.arraycopy(arrayQueue, front, newArrayQueue, 0, size());
 
