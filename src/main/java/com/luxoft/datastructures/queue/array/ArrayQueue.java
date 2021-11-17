@@ -5,12 +5,14 @@ import com.luxoft.datastructures.queue.AbstractQueue;
 import java.util.Iterator;
 
 public class ArrayQueue<T> extends AbstractQueue<T> {
+    private static final int INITIAL_CAPACITY = 10;
+    private static final double ENSURE_CAPACITY_RATE = 1.5;
     private int rear;
     private int front;
     private T[] arrayQueue;
 
     public ArrayQueue() {
-        this(10);
+        this(INITIAL_CAPACITY);
     }
 
     public ArrayQueue(int size) {
@@ -92,7 +94,7 @@ public class ArrayQueue<T> extends AbstractQueue<T> {
     }
 
     private void ensureCapacity() {
-        T[] newArrayQueue = (T[]) new Object[(int) (arrayQueue.length * 1.5) + 1];
+        T[] newArrayQueue = (T[]) new Object[(int) (arrayQueue.length * ENSURE_CAPACITY_RATE) + 1];
 
         System.arraycopy(arrayQueue, front, newArrayQueue, 0, size());
 
